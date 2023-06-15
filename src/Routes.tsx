@@ -1,14 +1,14 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 
-import ListPage from './ListPage';
-import DetailPage from './DetailPage';
+import ListPage from './MovieList';
+import DetailPage from './MovieDetail';
 
 const AppRoutes = () => (
     <Router>
         <Routes>
             <Route path="/" element={<ListPage />} />
-            <Route path="/detail/:id" element={<DetailPage />} />
+            <Route path="/movie/:id" element={<DetailPage />} />
         </Routes>
     </Router>
 );
