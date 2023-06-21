@@ -1,16 +1,15 @@
 import React from 'react';
 import './App.css';
-import AppRoutes from './Routes';
+import Header from './components/Header';
+import AppRoutes from './Routes'; 
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <AppRoutes />
-      </header>
+      <Header />  
+      <AppRoutes />
     </div>
   );
 }
 
 export default App;
-

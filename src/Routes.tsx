@@ -1,8 +1,8 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 
-import ListPage from './MovieList';
-import DetailPage from './MovieDetail';
+import ListPage from './components/MovieList';
+import DetailPage from './components/MovieDetail';
 
 const AppRoutes = () => (
     <Router>

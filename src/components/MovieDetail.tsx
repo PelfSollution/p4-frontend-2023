@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useParams, Link } from "react-router-dom";
 import axios from "axios";
-import { apiKey } from "./config";
+import { apiKey } from "../config";
 
 interface IMovieDetail {
   id: number;
