@@ -6,13 +6,16 @@ import { apiKey } from "./config";
 interface Movie {
   id: number;
   title: string;
+  poster_path: string;
+  release_date: string;
+  director?: string;
+  providers?: { provider_name: string; logo_url: string; }[]; 
 }
 
 function MovieList() {
   const [movies, setMovies] = useState<Movie[]>([]);
 
   useEffect(() => {
-    console.log(apiKey);
     axios
       .get(`https://api.themoviedb.org/3/movie/popular?api_key=${apiKey}`)
       .then((response) => {
@@ -24,10 +27,15 @@ function MovieList() {
   }, []);
 
   return (
-    <div>
+    <div className="film-container">
       {movies.map((movie) => (
-        <div key={movie.id}>
-          <Link to={`/movie/${movie.id}`}>{movie.title}</Link>
+        <div key={movie.id} className="film-card">
+          <img src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`} alt={movie.title} />
+          <h2>{movie.title}</h2>
+          <p>Fecha de lanzamiento: {movie.release_date}</p>
+          <p>Director: {movie.director}</p>
+
+          <Link to={`/movie/${movie.id}`}>Detalles</Link>
         </div>
       ))}
     </div>
