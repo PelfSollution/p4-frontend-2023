@@ -8,12 +8,10 @@ export async function getMovieList(page: number): Promise<Movie[]> {
   );
 
   const moviesWithDirectors = await Promise.all(
-    response.data.results.map(async (movie: any) => {
-      const director = await getFilmDetails(movie.id);
-      return { ...movie, director };
-    })
+    response.data.results.map((movie: any) => 
+      getFilmDetails(movie.id).then(director => ({ ...movie, director }))
+    )
   );
-
   return moviesWithDirectors;
 }
 
