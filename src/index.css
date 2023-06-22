@@ -165,42 +165,6 @@ h1 {
   margin-right: 8px;
 }
 
-/*PAGINACION*/
-
-.pagination {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 10px;
-  margin-top: 20px;
-  margin-bottom: 20px;
-}
-
-.pagination a,
-.pagination .current-page {
-  display: inline-block;
-  padding: 6px 12px;
-  font-size: 16px;
-  line-height: 1.4;
-  color: #5f6368;
-  text-decoration: none;
-  background-color: #f5f5f5;
-  border-radius: 4px;
-
-  transition: background-color 0.5s;
-  cursor: pointer;
-}
-
-.pagination a:hover {
-  background-color: #e9f0fe;
-  color: #3a7cd6;
-}
-
-.pagination .current-page {
-  color: #3a7cd6;
-  background-color: #e8f0fe;
-  cursor: default;
-}
 
 /*TOOLTIP*/
 .tooltip {
