@@ -1,11 +1,31 @@
-import React, { useEffect, useState } from "react";
-import { useParams, Link } from "react-router-dom";
+import { useEffect, useState, useContext } from "react";
+import { useParams, Link, useNavigate } from "react-router-dom";
 import { Movie } from "../services/types";
 import { getDetailedMovie } from "../services/movieServices";
+import { MovieContext } from "../context/MovieContext";
+import "./MovieDetail.css";
 
 function MovieDetail() {
   const { id = "0" } = useParams<{ id: string }>();
   const [movie, setMovie] = useState<Movie | null>(null);
+
+  const { movies, currentMovieIndex, setCurrentMovieIndex } =
+    useContext(MovieContext);
+  const navigate = useNavigate();
+
+  const nextMovie = () => {
+    if (currentMovieIndex < movies.length - 1) {
+      setCurrentMovieIndex(currentMovieIndex + 1);
+      navigate(`/movie/${movies[currentMovieIndex + 1].id}`);
+    }
+  };
+
+  const previousMovie = () => {
+    if (currentMovieIndex > 0) {
+      setCurrentMovieIndex(currentMovieIndex - 1);
+      navigate(`/movie/${movies[currentMovieIndex - 1].id}`);
+    }
+  };
 
   useEffect(() => {
     const fetchMovieDetail = async () => {
@@ -31,6 +51,23 @@ function MovieDetail() {
             <strong>Director:</strong> {movie.director}
           </p>
           <p>{movie.overview}</p>
+          <div className="detail-container">
+            <button
+              onClick={previousMovie}
+              disabled={currentMovieIndex === 0}
+              className="navigation-button"
+            >
+              Película anterior
+            </button>
+            <button
+              onClick={nextMovie}
+              disabled={currentMovieIndex === movies.length - 1}
+              className="navigation-button"
+            >
+              Siguiente película
+            </button>
+          </div>
+
           <Link to="/" className="volver">
             Volver al listado
           </Link>

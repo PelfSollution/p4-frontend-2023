@@ -1,16 +1,17 @@
-import React from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-
-import ListPage from './components/MovieList';
-import DetailPage from './components/MovieDetail';
+import { MovieProvider } from './context/MovieContext';
+import MovieList from './components/MovieList';
+import MovieDetail from './components/MovieDetail';
 
 const AppRoutes = () => (
-    <Router>
-        <Routes>
-            <Route path="/" element={<ListPage />} />
-            <Route path="/movie/:id" element={<DetailPage />} />
-        </Routes>
-    </Router>
+<Router>
+    <MovieProvider>
+      <Routes>
+        <Route path="/" element={<MovieList />} />
+        <Route path="/movie/:id" element={<MovieDetail />} />
+      </Routes>
+    </MovieProvider>
+</Router>
 );
 
 export default AppRoutes;

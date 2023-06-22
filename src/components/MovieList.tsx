@@ -1,12 +1,15 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
 import { Link } from "react-router-dom";
-import { Movie } from "../services/types";
 import { getMovieList } from "../services/movieServices";
+import { MovieContext } from "../context/MovieContext";
 import "./MovieList.css";
 
 function MovieList() {
-  const [movies, setMovies] = useState<Movie[]>([]);
+  const { movies, setMovies, setCurrentMovieIndex } = useContext(MovieContext);
   const [page, setPage] = useState(1);
+  useEffect(() => {
+    setCurrentMovieIndex(0);
+  }, []);
 
   useEffect(() => {
     const fetchMovies = async () => {
@@ -19,12 +22,12 @@ function MovieList() {
     };
 
     fetchMovies();
-  }, [page]);
+  }, [page, setMovies]);
 
   return (
     <div>
       <div className="film-container">
-        {movies.map((movie) => (
+        {movies.map((movie, index) => (
           <div key={movie.id} className="film-card">
             <img
               src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
@@ -38,7 +41,12 @@ function MovieList() {
               <strong>Director:</strong> {movie.director}
             </p>
 
-            <Link to={`/movie/${movie.id}`}>Detalles</Link>
+            <Link
+              to={`/movie/${movie.id}`}
+              onClick={() => setCurrentMovieIndex(index)}
+            >
+              Detalles
+            </Link>
           </div>
         ))}
       </div>
