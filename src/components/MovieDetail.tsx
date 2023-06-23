@@ -35,6 +35,31 @@ function MovieDetail() {
     fetchMovieDetail();
   }, [id]);
 
+  function getSearchUrl(providerName: string, filmTitle: string): string {
+    const encodedTitle = encodeURIComponent(filmTitle);
+    if (providerName.toLowerCase().includes("netflix")) {
+      return `https://www.netflix.com/search?q=${encodedTitle}`;
+    } else if (providerName.toLowerCase().includes("hbo")) {
+      return `https://www.hbomax.com/search?q=${encodedTitle}`;
+    } else if (
+      providerName.toLowerCase().includes("amazon") ||
+      providerName.toLowerCase().includes("prime")
+    ) {
+      return `https://www.amazon.es/s?k=${encodedTitle}&i=instant-video`;
+    } else if (
+      providerName.toLowerCase().includes("apple") ||
+      providerName.toLowerCase().includes("appletv")
+    ) {
+      return `https://tv.apple.com/search?q=${encodedTitle}`;
+    } else if (providerName.toLowerCase().includes("movistar")) {
+      return `https://ver.movistarplus.es/busqueda/?q=${encodedTitle}`;
+    } else {
+      return `https://www.google.com/search?q=${encodeURIComponent(
+        providerName
+      )}+${encodedTitle}`;
+    }
+  }
+
   return (
     <div className="film-container">
       {movie && (
@@ -51,6 +76,40 @@ function MovieDetail() {
             <strong>Director:</strong> {movie.director}
           </p>
           <p>{movie.overview}</p>
+          {movie.providers ? (
+            movie.providers.length > 0 ? (
+              <div className="watch-providers">
+                <h3>Proveedores de transmisión en línea (España)</h3>
+                <ul>
+                  {movie.providers.map((provider) => (
+                    <li key={provider.provider_name}>
+                      <a
+                        href={getSearchUrl(provider.provider_name, movie.title)}
+                        target="_blank"
+                        rel="noreferrer"
+                      >
+                        <img className="logo" 
+                          src={provider.logo_url}
+                          alt={provider.provider_name}
+                        />
+                      </a>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            ) : (
+              <p className="alert">
+                No se encontraron proveedores de transmisión en línea para esta
+                película.
+              </p>
+            )
+          ) : (
+            <p className="alert">
+              La información de los proveedores de transmisión en línea no está
+              disponible.
+            </p>
+          )}
+
           <div className="detail-container">
             <button
               onClick={previousMovie}
@@ -67,7 +126,6 @@ function MovieDetail() {
               Siguiente película
             </button>
           </div>
-
           <Link to="/" className="volver">
             Volver al listado
           </Link>

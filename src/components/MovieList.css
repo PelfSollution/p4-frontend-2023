@@ -6,3 +6,20 @@
   margin-top: 20px;
   margin-bottom: 20px;
 }
+
+button{
+  display: inline-block;
+  padding: 6px 12px;
+  font-size: 16px;
+  line-height: 1.4;
+  color: #5f6368;
+  text-decoration: none;
+  background-color: #f5f5f5;
+  border:0;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #e9f0fe;
+  color: #3a7cd6;
+}
