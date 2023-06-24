@@ -10,9 +10,6 @@ La migración se realizó para obtener una experiencia práctica con React y par
 El proyecto ahora utiliza React para generar una aplicación web dinámica, manteniendo la misma funcionalidad de mostrar una lista de películas populares y sus detalles. También se incluyen las funcionalidad typo Just Watch para ver en que plataformas se puede ver la película. Y la paginación tanto en la lista de peliculas como en el detalle de la película
 
 Durante la migración, se realizó la transición de un enfoque estático a uno dinámico para mostrar los datos de las películas. Se implementó el uso de Hooks y Context para manejar el estado global de la aplicación, y se hizo uso de React Router para la navegación entre las vistas de la lista de películas y los detalles individuales de las películas.
-
-## Información Extra
-
 ## Info de Create React App (CRA)
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
